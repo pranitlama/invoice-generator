@@ -2,7 +2,7 @@ import React from "react";
 import reactlogo from "../assets/react.svg";
 import "../App.css";
 
-export default function Header() {
+export default function Header({ clientinfo, userinfo, date, invoiceid }) {
   return (
     <div className="invoice-head">
       <div className="invoice-head-top">
@@ -17,12 +17,13 @@ export default function Header() {
       <div className="invoice-head-middle">
         <div className="invoice-head-middle-left text-start">
           <p>
-            <span className="text-bold">Date</span>:2/16/2024
+            <span className="text-bold">Date:</span>
+            {date}
           </p>
         </div>
         <div className="invoice-head-middle-right text-end">
           <p>
-            <span className="text-bold">Invoice No: 10002</span>
+            <span className="text-bold">Invoice No: {invoiceid}</span>
           </p>
         </div>
       </div>
@@ -31,19 +32,19 @@ export default function Header() {
         <div className="invoice-head-bottom-left">
           <ul>
             <li className="text-bold">Invoiced to:</li>
-            <li>Samik shakya</li>
-            <li>swoyambhu,kathmandu</li>
-            <li>gmail</li>
-            <li>Nepal</li>
+            <li>{clientinfo.clientname}</li>
+            <li>{clientinfo.clientaddress}</li>
+            <li>{clientinfo.clientemail}</li>
+            <li>{clientinfo.clientcountry}</li>
           </ul>
         </div>
         <div className="invoice-head-bottom-right">
           <ul className="text-end">
             <li className="text-bold">Invoiced from:</li>
-            <li>Samik shakya</li>
-            <li>swoyambhu,kathmandu</li>
-            <li>gmail</li>
-            <li>Nepal</li>
+            <li>{userinfo.username}</li>
+            <li>{userinfo.useraddress}</li>
+            <li>{userinfo.useremail}</li>
+            <li>{userinfo.usercountry}</li>
           </ul>
         </div>
       </div>

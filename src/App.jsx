@@ -24,7 +24,9 @@ function App() {
     usercountry: "",
   });
 
+  const [id, setId] = useState(1);
   const [transaction, setTransaction] = useState({
+    id: id,
     service: "",
     description: "",
     rate: "",
@@ -38,6 +40,7 @@ function App() {
 
   const [selectedFile, setSelectedFile] = useState("");
   const [imgurl, setImgUrl] = useState("");
+  const [tax, setTax] = useState("");
 
   const handleDate = (e) => {
     setDate(e.target.value);
@@ -73,20 +76,39 @@ function App() {
   };
 
   const handleAllTransaction = () => {
-    const item = {
-      service: transaction.service,
-      description: transaction.description,
-      rate: transaction.rate,
-      quantity: transaction.quantity,
-    };
-    setTransaction({ service: "", description: "", rate: "", quantity: "" });
+    if (
+      !transaction.service ||
+      !transaction.description ||
+      !transaction.quantity ||
+      !transaction.rate
+    ) {
+      alert("empty fields");
+    } else {
+      setId((prev) => prev + 1);
+      const item = {
+        id: id,
+        service: transaction.service,
+        description: transaction.description,
+        rate: transaction.rate,
+        quantity: transaction.quantity,
+      };
+      setTransaction({ service: "", description: "", rate: "", quantity: "" });
 
-    setallTransaction([...alltransaction, item]);
-    console.log(alltransaction);
+      setallTransaction([...alltransaction, item]);
+      console.log(alltransaction);
+    }
   };
 
   const handleShowInvoice = () => {
     setShowInvoice(!showinvoice);
+  };
+  const handleTax = (e) => {
+    setTax(e.target.value);
+  };
+
+  const handleDelete = (id) => {
+    const temp = alltransaction.filter((item) => item.id !== id);
+    setallTransaction(temp);
   };
 
   return showinvoice ? (
@@ -102,7 +124,7 @@ function App() {
               invoiceid={invoiceid}
             />
             <div className="overflow-view">
-              <Inbody alltransaction={alltransaction} />
+              <Inbody alltransaction={alltransaction} tax={tax} />
             </div>
             <Infoot handlePrint={handlePrint} showinvoice={handleShowInvoice} />
           </div>
@@ -121,12 +143,18 @@ function App() {
         handleDate={handleDate}
         handleInvoiceid={handleInvoiceid}
         handleFile={handleFile}
+        handleTax={handleTax}
+        tax={tax}
       />
+
       <Transaction
         handleTransaction={handleTransaction}
         handleAllTransaction={handleAllTransaction}
         alltransaction={alltransaction}
+        transaction={transaction}
+        handleDelete={handleDelete}
       />
+
       <button className="preview-btn" onClick={handleShowInvoice}>
         Preview Invoice
       </button>

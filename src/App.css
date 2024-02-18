@@ -253,6 +253,10 @@ body {
   width: 100%;
 }
 
+.transaction-table {
+  overflow-x: scroll;
+}
+
 .transaction-table table td,
 .transaction-table table th {
   padding: 12px;

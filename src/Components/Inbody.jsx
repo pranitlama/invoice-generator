@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Inbody({ alltransaction }) {
+export default function Inbody({ alltransaction, tax }) {
+  const totalAmount = alltransaction.reduce((total, object) => {
+    const totalfortransaction = object.rate * object.quantity;
+    return total + totalfortransaction;
+  }, 0);
+
+  const taxamt = ((tax ? tax : 0) / 100) * totalAmount;
   return (
     <div className="invoice-body">
       <table>
@@ -14,9 +20,9 @@ export default function Inbody({ alltransaction }) {
           </tr>
         </thead>
         <tbody>
-          {alltransaction.map((item) => {
+          {alltransaction.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td>{item.service}</td>
                 <td>{item.description}</td>
                 <td>{item.rate}</td>
@@ -30,15 +36,17 @@ export default function Inbody({ alltransaction }) {
       <div className="invoice-body-bottom">
         <div className="invoice-body-info-item border-bottom">
           <div className="info-item-td text-end text-bold">Sub-total(₹):</div>
-          <div className="info-item-td text-end">10000</div>
+          <div className="info-item-td text-end">{totalAmount}</div>
         </div>
         <div className="invoice-body-info-item border-bottom">
           <div className="info-item-td text-end text-bold">Tax(%):</div>
-          <div className="info-item-td text-end">100</div>
+          <div className="info-item-td text-end">
+            {tax ? tax : 0}(₹ {taxamt})
+          </div>
         </div>
         <div className="invoice-body-info-item">
           <div className="info-item-td text-end text-bold">Total(₹):</div>
-          <div className="info-item-td text-end">10000</div>
+          <div className="info-item-td text-end">{totalAmount + taxamt}</div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ export default function Userinfo({
   handleUser,
   handleDate,
   handleInvoiceid,
+  handleFile,
 }) {
   return (
     <div className="input-wrapper">
@@ -59,6 +60,13 @@ export default function Userinfo({
           name={"invoiceid"}
           value={invoiceid}
           onChange={(e) => handleInvoiceid(e)}
+        />
+
+        <Inputfield
+          label={"Company's Logo"}
+          type={"file"}
+          name={"logo"}
+          onChange={(e) => handleFile(e)}
         />
       </div>
     </div>

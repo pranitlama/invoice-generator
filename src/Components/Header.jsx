@@ -2,12 +2,19 @@ import React from "react";
 import reactlogo from "../assets/react.svg";
 import "../App.css";
 
-export default function Header({ clientinfo, userinfo, date, invoiceid }) {
+export default function Header({
+  clientinfo,
+  userinfo,
+  date,
+  invoiceid,
+  logo,
+}) {
   return (
     <div className="invoice-head">
       <div className="invoice-head-top">
         <div className="invoice-head-top-left text-start">
-          <img src={reactlogo} alt="" />
+          {console.log(logo, "logo")}
+          <img src={logo} alt="" />
         </div>
         <div className="invoice-head-top-right text-end">
           <h3>Invoice</h3>
@@ -17,13 +24,13 @@ export default function Header({ clientinfo, userinfo, date, invoiceid }) {
       <div className="invoice-head-middle">
         <div className="invoice-head-middle-left text-start">
           <p>
-            <span className="text-bold">Date:</span>
-            {date}
+            <span className="text-bold">Invoice No: {invoiceid}</span>
           </p>
         </div>
         <div className="invoice-head-middle-right text-end">
           <p>
-            <span className="text-bold">Invoice No: {invoiceid}</span>
+            <span className="text-bold">Date:</span>
+            {date}
           </p>
         </div>
       </div>

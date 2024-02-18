@@ -240,6 +240,32 @@ body {
   outline: none;
 }
 
+.transaction-table {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.transaction-table table {
+  border-collapse: collapse;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.transaction-table table td,
+.transaction-table table th {
+  padding: 12px;
+}
+
+.transaction-table table tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.transaction-table table thead {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 420px) {
   .input-wrapper .form .input_field {
     flex-direction: column;

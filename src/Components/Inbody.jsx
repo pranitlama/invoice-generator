@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Inbody() {
+export default function Inbody({ alltransaction }) {
   return (
     <div className="invoice-body">
       <table>
@@ -14,34 +14,17 @@ export default function Inbody() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>coding</td>
-            <td>fixing bug</td>
-            <td>50</td>
-            <td>2</td>
-            <td className="text-end">100</td>
-          </tr>
-          <tr>
-            <td>coding</td>
-            <td>fixing bug</td>
-            <td>50</td>
-            <td>2</td>
-            <td className="text-end">100</td>
-          </tr>
-          <tr>
-            <td>coding</td>
-            <td>fixing bug</td>
-            <td>50</td>
-            <td>2</td>
-            <td className="text-end">100</td>
-          </tr>
-          <tr>
-            <td>coding</td>
-            <td>fixing bug</td>
-            <td>50</td>
-            <td>2</td>
-            <td className="text-end">100</td>
-          </tr>
+          {alltransaction.map((item) => {
+            return (
+              <tr>
+                <td>{item.service}</td>
+                <td>{item.description}</td>
+                <td>{item.rate}</td>
+                <td>{item.quantity}</td>
+                <td className="text-end">{item.rate * item.quantity}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="invoice-body-bottom">

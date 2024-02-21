@@ -279,3 +279,22 @@ body {
     margin-bottom: 5px;
   }
 }
+
+@media print {
+  .print-area {
+    visibility: visible;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+
+  .overflow-view {
+    overflow-x: hidden;
+  }
+
+  .invoice-btn {
+    display: none;
+  }
+}

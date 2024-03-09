@@ -52,7 +52,7 @@ export default function Userinfo({
           label={"Date"}
           type={"date"}
           name={"date"}
-          value={date}
+          value={userinfo.date}
           onChange={(e) => handleDate(e)}
         />
 

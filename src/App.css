@@ -270,6 +270,12 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.pdfview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 420px) {
   .input-wrapper .form .input_field {
     flex-direction: column;
@@ -297,4 +303,8 @@ body {
   .invoice-btn {
     display: none;
   }
+}
+
+@page {
+  margin: 0;
 }

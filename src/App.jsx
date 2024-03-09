@@ -7,6 +7,9 @@ import Clientinfo from "./Components/Clientinfo";
 import Userinfo from "./Components/Userinfo";
 import Transaction from "./Components/Transaction";
 
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import Document from "./Document";
+
 function App() {
   const [showinvoice, setShowInvoice] = useState(true);
 
@@ -112,26 +115,6 @@ function App() {
   };
 
   return showinvoice ? (
-    <div>
-      <div className="invoice-wrapper">
-        <div className="invoice">
-          <div className="invoice-container">
-            <Header
-              clientinfo={clientinfo}
-              logo={imgurl}
-              userinfo={userinfo}
-              date={date}
-              invoiceid={invoiceid}
-            />
-            <div className="overflow-view">
-              <Inbody alltransaction={alltransaction} tax={tax} />
-            </div>
-            <Infoot handlePrint={handlePrint} showinvoice={handleShowInvoice} />
-          </div>
-        </div>
-      </div>
-    </div>
-  ) : (
     <>
       <Clientinfo clientinfo={clientinfo} handleClient={handleClient} />
       <Userinfo
@@ -159,7 +142,69 @@ function App() {
         Preview Invoice
       </button>
     </>
+  ) : (
+    <div className="pdfview">
+      <PDFViewer
+        // showToolbar={false}
+        style={{
+          width: "50%",
+          height: "100vh",
+        }}
+      >
+        <Document
+          clientinfo={clientinfo}
+          logo={imgurl}
+          userinfo={userinfo}
+          date={date}
+          invoiceid={invoiceid}
+          alltransaction={alltransaction}
+          tax={tax}
+        />
+      </PDFViewer>
+      <PDFDownloadLink
+        document={
+          <Document
+            clientinfo={clientinfo}
+            logo={imgurl}
+            userinfo={userinfo}
+            date={date}
+            invoiceid={invoiceid}
+            alltransaction={alltransaction}
+            tax={tax}
+          />
+        }
+      >
+        Download
+      </PDFDownloadLink>
+      <button className="" onClick={handleShowInvoice}>
+        Add Information
+      </button>
+    </div>
   );
+  // return showinvoice ? (
+  //   <div>
+  //     <div className="invoice-wrapper">
+  //       <div className="invoice">
+  //         <div className="invoice-container">
+  //           <Header
+  //             clientinfo={clientinfo}
+  //             logo={imgurl}
+  //             userinfo={userinfo}
+  //             date={date}
+  //             invoiceid={invoiceid}
+  //           />
+  //           <div className="overflow-view">
+  //             <Inbody alltransaction={alltransaction} tax={tax} />
+  //           </div>
+  //           <Infoot handlePrint={handlePrint} showinvoice={handleShowInvoice} />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // ) : (
+  //   <>
+
+  // );
 }
 
 export default App;
